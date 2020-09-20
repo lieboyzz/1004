@@ -1,0 +1,94 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Sep 20 10:47:47 2020
+
+@author: MI
+"""
+import random
+import math
+from fractions import Fraction
+import profile
+def fun():
+   for i in range(100000):
+      a = i * i
+def zhengshu(q,ans):#整数出题
+    sym = random.choice(['+','-','*','/'])
+    n1 = random.randint(1,20)
+    n2 = random.randint(1,20)
+    if sym == '+':
+        q.append(str(n1) + '+' + str(n2) + '=')
+        ans.append(n1 + n2)
+    elif sym == '-':
+        bign,smalln = max(n1, n2), min(n1, n2)#防止出现负数
+        q.append(str(bign) + '-' + str(smalln) + '=')
+        ans.append(bign - smalln)
+    elif sym == '*':
+        q.append(str(n1) + '*' + str(n2) + '=')
+        ans.append(n1 * n2)
+    else:
+        n1, n2 = max(n1, n2), min(n1, n2)
+        q.append(str(n1) + '/' + str(n2) + '=')
+        ans.append(n1 / n2)
+            
+def main():
+    q = []
+    ans = []
+    i = 0
+    print('整数的四则运算输入1，真分数的四则运算输入2')
+    a = int(input())
+    if a == 1:
+        print('输入题目的数量：')
+        n = int(input())
+        while i<n:
+            zhengshu(q,ans)     
+            i=i+1
+        print(q)   
+        print('正确答案为：')
+        print(ans)
+    else:
+        print('输入题目的数量：')
+        n = int(input())
+        while i<n:
+            fenshu(q,ans)     
+            i=i+1
+        print(q)   
+        print('正确答案为：')
+        print(ans)
+def createF(): #生成分数
+    fz1 = random.randint(0, 20)
+    if fz1 == 0:
+        fm1 = random.randint(1, 20)
+    else:
+        fm1 = random.randint(1, 20)
+    f1 = Fraction(fz1, fm1)
+    fz2 = random.randint(1, 20)
+    fm2 = random.randint(20, 20)
+    f2 = Fraction(fz2, fm2)
+    return f1, f2
+def fenshu(q,ans):    #两个分数的四则运算
+    symbol = random.choice(['+','-','*','/'])
+    f1,f2 = createF()
+    if symbol =='+':
+        while f1+f2>1:
+            f1,f2 = createF()
+        q.append(str(f1)+'+'+str(f2)+'=')
+        ans.append(f1+f2)
+    elif symbol =='-':
+        f1,f2 = max(f1,f2),min(f1,f2)  #防止出现负数
+        q.append(str(f1)+'-'+str(f2)+'=')
+        ans.append(f1-f2)
+    elif symbol == '*':
+        while f1*f2>1:
+            f1,f2 = createF()
+        q.append(str(f1)+'×'+str(f2)+'=')
+        ans.append(f1*f2)
+    else:
+        while f1/f2>1:
+            f1,f2=createF()
+        q.append(str(f1)+'÷'+str(f2)+'=')
+        ans.append(Fraction(f1,f2))
+main()
+profile.run('fun()')
+   
+    
+    
