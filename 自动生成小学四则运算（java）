@@ -108,7 +108,7 @@ class Demo {
                  PrintWriter pw = new PrintWriter(writer); 
                   if(writer1==0) 
                   { 
-                      pw.println("201571030132"); 
+                      pw.println("main"); 
                       writer1=1; 
                   }
                   writer.close();
